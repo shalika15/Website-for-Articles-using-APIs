@@ -1,0 +1,16 @@
+<h1>NEW POST</h1>
+
+
+{%if errors%}
+{{errors}}
+{%endif%}
+
+<form method="POST">
+    {% csrf_token %}
+
+    <br/>
+
+    <label>{{form.as_p}}</label>
+    <button type="submit">Submit</button>
+
+</form>

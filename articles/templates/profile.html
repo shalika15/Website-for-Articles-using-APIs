@@ -1,0 +1,44 @@
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+
+<h1>All the Articles</h1>
+
+
+{% for p in posts %}
+
+
+<br/>
+{{p.content}}
+<br/>
+{{p.author.username}}
+<br/>
+{{p.title}}
+<br/>
+
+<button id="up" value="{{p.id}}" name="u_btn">UpVote </button>
+{{p.vote_total}}
+
+<button id="down" value="{{p.id}}" name="u_btn">DownVote </button>
+<br/>
+<br/>
+{% endfor %}
+
+<script type="text/javascript">
+$("button").click(function(e) {
+    e.preventDefault();
+    var idb = $(this).attr('id');
+    $.ajax({
+        type: "POST",
+        url: "/apis/vote/",
+        data: {
+            id: $(this).val(),
+            type: idb,
+            'csrfmiddlewaretoken': '{{csrf_token}}',
+
+        },
+        success: function(result) {
+           window.location.href = "/article/";
+        },
+    });
+});
+
+</script>

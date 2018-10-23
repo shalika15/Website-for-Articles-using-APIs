@@ -5,9 +5,8 @@ from django.contrib.auth.models import User
 
 
 class Article(models.Model):
-    article_id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=200)
-    content = models.CharField(max_length=200)
-    author = models.ForeignKey(User, on_delete=0)
-    vote_total = models.IntegerField(default=1)
+    content = models.TextField(max_length=500)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    vote_total = models.IntegerField(default=0)
 
